@@ -13,7 +13,7 @@
       "
     >
 
-    <title>WebAR Mô Hình Triceratops - AR.js</title>
+    <title>WebAR GLB - AR.js</title>
 
     <!-- A-Frame -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
@@ -27,57 +27,66 @@
     <a-scene
       embedded
       vr-mode-ui="enabled: false"
+
+      renderer="
+        logarithmicDepthBuffer: true;
+        colorManagement: true;
+      "
+
       arjs="
         sourceType: webcam;
         debugUIEnabled: false;
       "
     >
 
-      <!-- Assets -->
+      <!-- ===================== -->
+      <!-- ASSETS -->
+      <!-- ===================== -->
+
       <a-assets>
 
+        <!-- File GLB -->
         <a-asset-item
-          id="bird-obj"
-          src="./assets/triceratops_dinosaur.mtl">
-        </a-asset-item>
-
-        <a-asset-item
-          id="bird-mtl"
-          src="./assets/triceratops_dinosaur.obj">
+          id="model-glb"
+          src="./assets/triceratops_dinosaur.glb">
         </a-asset-item>
 
       </a-assets>
 
 
-      <!-- Marker Hiro -->
+      <!-- ===================== -->
+      <!-- MARKER -->
+      <!-- ===================== -->
+
       <a-marker preset="hiro">
 
-        <!-- Mô hình 3D -->
-        <a-obj-model
-          src="#bird-obj"
-          mtl="#bird-mtl"
+        <!-- Model GLB -->
+        <a-gltf-model
+          src="#model-glb"
 
           position="0 0 0"
 
-          scale="0.05 0.05 0.05"
+          scale="0.5 0.5 0.5"
 
-          rotation="-90 0 0"
+          rotation="0 0 0"
 
           animation="
             property: rotation;
-            from: -90 0 0;
-            to: -90 360 0;
+            to: 0 360 0;
             loop: true;
             dur: 8000;
             easing: linear;
           "
         >
-        </a-obj-model>
+        </a-gltf-model>
 
       </a-marker>
 
 
-      <!-- Camera -->
+      <!-- ===================== -->
+      <!-- CAMERA -->
+      <!-- ===================== -->
+
       <a-entity camera></a-entity>
 
     </a-scene>
