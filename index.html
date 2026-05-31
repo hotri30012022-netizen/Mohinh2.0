@@ -1,75 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
+<html>
+  <head>
+    <meta charset="utf-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+    <meta
+      name="viewport"
+      content="
+        width=device-width,
+        initial-scale=1.0,
+        minimum-scale=1.0,
+        maximum-scale=1.0
+      "
+    >
 
-  <title>WebAR DRAGON - AR.js</title>
+    <title>WebAR GLB - AR.js</title>
 
-  <!-- A-Frame -->
-  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 
-  <!-- AR.js -->
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <!-- AR.js -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  </head>
 
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-    }
-  </style>
-</head>
+  <body style="margin: 0; overflow: hidden;">
 
-<body>
+    <a-scene
+      embedded
+      vr-mode-ui="enabled: false"
 
-  <a-scene
-    embedded
-    vr-mode-ui="enabled: false"
-    renderer="logarithmicDepthBuffer: true;"
-    arjs="sourceType: webcam; debugUIEnabled: false;"
-  >
+      renderer="
+        logarithmicDepthBuffer: true;
+        colorManagement: true;
+      "
 
-    <!-- Load file GLB -->
-    <a-assets>
-      <a-asset-item
-        id="model"
-        src="./assets/purple_dragon.glb">
-      </a-asset-item>
-    </a-assets>
+      arjs="
+        sourceType: webcam;
+        debugUIEnabled: false;
+      "
+    >
 
-    <!-- Marker Hiro -->
-    <a-marker preset="hiro">
+      <!-- ===================== -->
+      <!-- ASSETS -->
+      <!-- ===================== -->
 
-      <!-- GLB Model -->
-      <a-entity
-        gltf-model="#model"
+      <a-assets>
 
-        position="0 0 0"
+        <!-- File GLB -->
+        <a-asset-item
+          id="model-glb"
+          src="./assets/purple_dragon.glb">
+        </a-asset-item>
 
-        scale="0.5 0.5 0.5"
+      </a-assets>
 
-        rotation="0 0 0"
 
-        animation="
-          property: rotation;
-          to: 0 360 0;
-          loop: true;
-          dur: 8000;
-          easing: linear;
-        "
-      >
-      </a-entity>
+      <!-- ===================== -->
+      <!-- MARKER -->
+      <!-- ===================== -->
 
-    </a-marker>
+      <a-marker preset="hiro">
 
-    <!-- Camera -->
-    <a-entity camera></a-entity>
+        <!-- Model GLB -->
+        <a-gltf-model
+          src="#model-glb"
 
-  </a-scene>
+          position="0 0 0"
 
-</body>
+          scale="0.5 0.5 0.5"
+
+          rotation="0 0 0"
+
+          animation="
+            property: rotation;
+            to: 0 360 0;
+            loop: true;
+            dur: 8000;
+            easing: linear;
+          "
+        >
+        </a-gltf-model>
+
+      </a-marker>
+
+
+      <!-- ===================== -->
+      <!-- CAMERA -->
+      <!-- ===================== -->
+
+      <a-entity camera></a-entity>
+
+    </a-scene>
+
+  </body>
 </html>
